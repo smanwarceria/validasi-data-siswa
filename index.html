@@ -1,1 +1,136 @@
-<html></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validasi Data Siswa</title>
+<meta name="description" content="Portal validasi data induk siswa">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">VS</div>
+      <div class="brand-text">
+        <div class="title">Validasi Data Siswa</div>
+        <div class="subtitle">Portal Data Induk Sekolah</div>
+      </div>
+    </div>
+    <button class="btn-logout hidden" id="btnLogout">Keluar</button>
+  </header>
+
+  <!-- Main -->
+  <main class="main-area">
+
+    <!-- ===== VIEW: LOGIN ===== -->
+    <section id="viewLogin" class="login-wrap">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="badge-round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12c2.5 0 4.5-2 4.5-4.5S14.5 3 12 3 7.5 5 7.5 7.5 9.5 12 12 12Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M4 20.5c0-3.6 3.6-6.5 8-6.5s8 2.9 8 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h1>Masuk Akun Siswa</h1>
+          <p>Gunakan NISN dan tanggal lahir untuk memeriksa data Anda</p>
+        </div>
+
+        <div class="login-error" id="loginError"></div>
+
+        <form id="formLogin" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="inputNisn">NISN</label>
+            <input type="text" class="form-control" id="inputNisn" inputmode="numeric" autocomplete="username" placeholder="Contoh: 0051234567" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label" for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" inputmode="numeric" autocomplete="current-password" placeholder="YYYYMMDD" maxlength="8" required>
+          </div>
+          <p class="form-hint mb-3">Password = tanggal lahir, format <strong>YYYYMMDD</strong> (contoh: 20100517 untuk 17 Mei 2010).</p>
+          <button type="submit" class="btn btn-primary-navy w-100" id="btnLogin">
+            <span class="btn-text">Masuk</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: DASHBOARD ===== -->
+    <section id="viewDashboard" class="dash-wrap hidden">
+
+      <div class="id-card">
+        <div id="stampSlot"></div>
+        <div class="id-card-top">
+          <div>
+            <div class="id-eyebrow">Kartu Data Siswa</div>
+            <div class="id-name" id="txtNama">-</div>
+            <div class="id-nisn" id="txtNisnTop">NISN: -</div>
+          </div>
+        </div>
+        <div class="id-fields">
+          <div class="id-field">
+            <div class="label">Tempat Lahir</div>
+            <div class="value" id="txtTempatLahir">-</div>
+          </div>
+          <div class="id-field">
+            <div class="label">Tanggal Lahir</div>
+            <div class="value" id="txtTanggalLahir">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: belum verifikasi -->
+      <div class="verif-panel hidden" id="panelBelumVerifikasi">
+        <h2>Periksa data Anda</h2>
+        <p class="lead-text">Cocokkan data di kartu di atas dengan dokumen resmi Anda (akta lahir / KK / rapor), lalu pilih salah satu berikut ini.</p>
+
+        <div class="choice-group">
+          <label class="choice-card valid">
+            <input type="radio" name="statusData" value="Valid">
+            <span class="choice-label">Data Valid / Sesuai</span>
+          </label>
+          <label class="choice-card tidak">
+            <input type="radio" name="statusData" value="Tidak Valid">
+            <span class="choice-label">Data Tidak Sesuai</span>
+          </label>
+        </div>
+
+        <div class="login-error" id="submitError"></div>
+
+        <button class="btn btn-gold w-100" id="btnSimpan" disabled>
+          <span class="btn-text">Simpan</span>
+        </button>
+      </div>
+
+      <!-- Panel: sudah verifikasi (read-only) -->
+      <div class="verif-panel hidden" id="panelSudahVerifikasi">
+        <h2>Verifikasi Selesai</h2>
+        <p class="lead-text">Anda sudah melakukan verifikasi data. Data bersifat baca-saja dan tidak dapat diubah kembali.</p>
+        <div id="statusBannerSlot"></div>
+        <div class="status-meta" id="txtWaktuVerifikasi"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    Portal Validasi Data Siswa &middot; Hubungi tata usaha jika mengalami kendala login.
+  </footer>
+</div>
+
+<div class="toast-custom" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
