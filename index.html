@@ -52,13 +52,53 @@
             <label class="form-label" for="inputNisn">NISN</label>
             <input type="text" class="form-control" id="inputNisn" inputmode="numeric" autocomplete="username" placeholder="Contoh: 0051234567" required>
           </div>
-          <div class="mb-2">
+          <div class="mb-3">
             <label class="form-label" for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" inputmode="numeric" autocomplete="current-password" placeholder="YYYYMMDD" maxlength="8" required>
+            <input type="password" class="form-control" id="inputPassword" autocomplete="current-password" placeholder="Password Anda" required>
+            <p class="form-hint mb-0">Login pertama kali? Gunakan tanggal lahir format <strong>YYYYMMDD</strong> (contoh: 20100517 untuk 17 Mei 2010) — Anda akan diminta membuat password sendiri setelah itu. Sudah pernah membuat password? Gunakan password Anda sendiri.</p>
           </div>
-          <p class="form-hint mb-3">Password = tanggal lahir, format <strong>YYYYMMDD</strong> (contoh: 20100517 untuk 17 Mei 2010).</p>
+
+          <!-- reCAPTCHA v2 checkbox — ganti data-sitekey dengan Site Key asli dari
+               https://www.google.com/recaptcha/admin -->
+          <div class="mb-3">
+            <div class="g-recaptcha" data-sitekey="GANTI_DENGAN_RECAPTCHA_SITE_KEY"></div>
+          </div>
+
           <button type="submit" class="btn btn-primary-navy w-100" id="btnLogin">
             <span class="btn-text">Masuk</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: BUAT PASSWORD (setelah aktivasi pakai tanggal lahir) ===== -->
+    <section id="viewSetPassword" class="login-wrap hidden">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="badge-round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M8 10.5V7.5a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <h1>Buat Password Baru</h1>
+          <p>Ini login pertama Anda. Buat password sendiri agar akun Anda lebih aman ke depannya.</p>
+        </div>
+
+        <div class="login-error" id="setPasswordError"></div>
+
+        <form id="formSetPassword" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="inputNewPassword">Password Baru</label>
+            <input type="password" class="form-control" id="inputNewPassword" autocomplete="new-password" minlength="6" required>
+            <p class="form-hint mb-0">Minimal 6 karakter. Hindari memakai tanggal lahir Anda sendiri.</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="inputConfirmPassword">Ulangi Password Baru</label>
+            <input type="password" class="form-control" id="inputConfirmPassword" autocomplete="new-password" minlength="6" required>
+          </div>
+          <button type="submit" class="btn btn-primary-navy w-100" id="btnSetPassword">
+            <span class="btn-text">Simpan Password</span>
           </button>
         </form>
       </div>
@@ -69,14 +109,16 @@
 
       <div class="id-card">
         <div id="stampSlot"></div>
-        <div class="id-card-top">
-          <div>
-            <div class="id-eyebrow">Kartu Data Siswa</div>
-            <div class="id-name" id="txtNama">-</div>
-            <div class="id-nisn" id="txtNisnTop">NISN: -</div>
-          </div>
-        </div>
+        <div class="id-eyebrow">Kartu Data Siswa</div>
         <div class="id-fields">
+          <div class="id-field">
+            <div class="label">Nama</div>
+            <div class="value" id="txtNama">-</div>
+          </div>
+          <div class="id-field">
+            <div class="label">NISN</div>
+            <div class="value" id="txtNisnTop">-</div>
+          </div>
           <div class="id-field">
             <div class="label">Tempat Lahir</div>
             <div class="value" id="txtTempatLahir">-</div>
@@ -102,6 +144,11 @@
             <input type="radio" name="statusData" value="Tidak Valid">
             <span class="choice-label">Data Tidak Sesuai</span>
           </label>
+        </div>
+
+        <div class="mb-3 hidden" id="catatanWrap">
+          <label class="form-label" for="inputCatatan">Jelaskan bagian yang tidak sesuai</label>
+          <textarea class="form-control" id="inputCatatan" rows="3" placeholder='Misal: Nama tertulis "Juju" seharusnya "Jujun"'></textarea>
         </div>
 
         <div class="login-error" id="submitError"></div>
@@ -131,6 +178,7 @@
 <div class="toast-custom" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>
