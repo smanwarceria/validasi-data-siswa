@@ -3,7 +3,7 @@
 // Contoh: https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec
 // (Site Key reCAPTCHA diatur langsung di index.html pada atribut data-sitekey)
 const CONFIG = {
-  API_URL: 'https://script.google.com/macros/s/AKfycbzT16rZe8o6mBWNYj8klbmNK0o6QglZHudJeaVFiBTd2tUsIuviHEulse2Q7fWiXPTB/exec'
+  API_URL: 'https://script.google.com/macros/s/AKfycbzDwJ43uOk25HxodZ75CvSU55hF-UHZmKRt7VA4eFyQJ0yrgxa5twuEYlyyebrTq67V/exec'
 };
 // ===================================================
 
